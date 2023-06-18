@@ -5,7 +5,10 @@ const graphqlAPI = process.env.NEXT_PUBLIC_GRAPHCMS_ENDPOINT;
 export const getPosts = async () => {
     const query = gql`
     query Assets {
-      postsConnection {
+      postsConnection(
+        orderBy: createdAt_DESC
+        first: 4
+      ) {
         edges {
           node {
             author {
@@ -31,11 +34,8 @@ export const getPosts = async () => {
         }
       }
     }
-    
     `
-
     const results = await request(graphqlAPI, query);
-    console.log(results.postsConnection.edges);
     return results.postsConnection.edges;
 }
 
@@ -43,8 +43,8 @@ export const getRecentPosts = async() => {
   const query = gql`
   query GetPostDetails () {
     posts(
-      orderBy: createdAt_ASC
-      last: 3
+      orderBy: createdAt_DESC
+      first: 3
     ) {
       title
       featureImage {
@@ -65,7 +65,8 @@ export const getSimilarPosts = async(categories, slug) => {
     query GetPostDetails ($slug: String!, $categories: [String!]) {
       posts(
         where: { slug_not: $slug, AND: {categories_some: { slug_in: $categories}}}
-        last: 3
+        orderBy: createdAt_DESC
+        first: 3
       ) {
         title
         featureImage {
@@ -120,11 +121,17 @@ export const getPostDetail = async (slug) => {
       content {
         raw
       }
+      photosByPost {
+        photo {
+          url
+        }
+      }
     }
   }
   `;
 
   const result = await request(graphqlAPI, query, { slug });
+  console.log(result);
   return result.post;
 }
 
@@ -157,3 +164,106 @@ export const getComments = async (slug) => {
     console.log(error);
   }
 };
+
+export const getFeaturedPosts = async () => {
+  const query = gql`
+    query GetFeaturedPost() {
+      posts (where: {featuredPost: true}
+        orderBy: createdAt_DESC
+        ) {
+        author {
+          bio
+          name
+          id
+          photo {
+            url
+          }
+        }
+        createdAt
+        slug
+        title
+        featureImage {
+          url
+        }
+      }
+    }
+  `
+  const result = await request(graphqlAPI, query);
+  return result.posts;
+};
+
+export const getAllPost = async () => {
+  const query = gql`
+  query Assets {
+    postsConnection(
+      orderBy: createdAt_DESC
+    ) {
+      edges {
+        node {
+          author {
+            bio
+            name
+            id
+            photo {
+              url
+            }
+          }
+          createdAt
+          slug
+          title
+          excerpt
+          featureImage {
+            url
+          }
+          categories {
+            name
+            slug
+          }
+        }
+      }
+    }
+  }
+  `
+
+  const results = await request(graphqlAPI, query);
+  return results.postsConnection.edges;
+}
+
+
+export const getPostsByCategory = async (categorySlug) => {
+  const query = gql`
+  query Assets($categorySlug: String!) {
+    postsConnection(
+      where: {categories_some: {slug: $categorySlug}}
+      orderBy: createdAt_DESC
+    ) {
+      edges {
+        node {
+          author {
+            bio
+            name
+            id
+            photo {
+              url
+            }
+          }
+          createdAt
+          slug
+          title
+          excerpt
+          featureImage {
+            url
+          }
+          categories {
+            name
+            slug
+          }
+        }
+      }
+    }
+  }
+  `
+  const results = await request(graphqlAPI, query, { categorySlug });
+  console.log(results);
+  return results.postsConnection.edges;
+}

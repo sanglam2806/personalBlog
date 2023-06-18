@@ -1,5 +1,6 @@
 import '../styles/globals.css'
 import Header from '@components/Header'
+import Footer from '@components/Footer'
 
 export const metadata = {
   title: 'Tim Mitsukeru Blog',
@@ -18,6 +19,8 @@ const RootLayout = ({ children }) => {
           <main className='app'>
               {children}
           </main>
+
+          <Footer/>
         </body>
     </html>
   )

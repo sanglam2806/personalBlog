@@ -5,8 +5,6 @@ import { getCategories } from '../services'
 
 import React, { useContext } from 'react'
 
-const categories = [{name:'React', slug:'react'}, {name:'Web Development', slug:'web-dev'}]
-
 const Header = () => {
     const [categories, setCategories] = useState([]);
 
@@ -15,12 +13,12 @@ const Header = () => {
     }, [])
 
   return (
-    <div className='container mx-auto px-10 mb-8'>
+    <div className="mx-auto px-8">
         <div className='border-b w-full inline-block border-blue-400 py-8'>
             <div className='md:float-left block'>
                 <Link href="/">
                     <span className='cursor-pointer font-bold text-4xl text-blue-400'>
-                        Lam Mitsuru
+                        Tim Mitsuru
                     </span>
                 </Link>
             </div>

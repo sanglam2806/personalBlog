@@ -1,21 +1,21 @@
 "use client"
 import React from 'react'
-import { getPosts } from "../services"
+import { getAllPost, getPostsByCategory } from "../services"
 import { useEffect, useState } from 'react';
 
 import PostCard from "@components/PostCard";
 
-const ListPost = () => {
+const ListPost = (category) => {
+  console.log(category.slug)
     const [posts, setPosts] = useState([]);
   
     useEffect(() => {
       (async () => {
-        const res = await getPosts();
-        setPosts(res);
+        category.slug? getPostsByCategory(category.slug).then((result) => setPosts(result)) : getAllPost().then((result) => setPosts(result));
       })();
     }, []);
   return (
-    <div className="lg:col-span-8 col-span-1">
+    <div className="lg:col-span-9 col-span-1">
           {posts?.map( (post) => <PostCard post={post?.node} key={post?.title} />)}
     </div>
   )

@@ -53,3 +53,7 @@ a {
 * {
   box-sizing: border-box;
 }
+
+.carousel-container {
+  width: 100%;
+ }

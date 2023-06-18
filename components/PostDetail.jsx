@@ -1,8 +1,10 @@
 import React from 'react'
 import moment from 'moment';
-
+import 'moment/locale/ja'
+moment.locale('ja')
 const PostDetail = ( {post} ) => {
 
+  console.log(post);
     const getContentFragment = (index, text, obj, type) => {
         let modifiedText = text;
     
@@ -45,11 +47,11 @@ const PostDetail = ( {post} ) => {
   return (
     <div className='bg-white bg-opacity-60 shadow-lg rounded-lg lg:p-8 pb-12 mb-8'>
         <div className='relative overflow-hidden shadow-md mb-6'>
-        <img
-            alt={post.title}
-            src={post.featureImage?.url}
-            className='object-top h-full w-full rounded-t-lg'
-            />
+          <img
+              alt={post?.title}
+              src={post?.featureImage?.url}
+              className='object-center object-cover h-[40vw] w-full rounded-t-lg'
+              />
         </div>
         <div className='px-4 lg:px-0'>
             <div className='flex items-center mb-8 w-full'>
@@ -62,14 +64,23 @@ const PostDetail = ( {post} ) => {
                     <p className='inline align-middle text-gray-700 ml-2 text-md'>{post.author?.name}</p>
                 </div>
                 <div className='font-medium text-gray-700'>
-                    <span> {moment(post.createAt).format('MMM DD, YYYY')}</span>
+                    <span> {moment(post.createAt).format('LL')}</span>
                 </div>
             </div>
-            <h1 className='mb-8 text-4xl font-semibold'>{post.title}</h1>
-            {post.content?.raw.children.map(( typeObj, index) => {
-                const children = typeObj.children.map((item, itemIndex) => getContentFragment(itemIndex, item.text, item));
-                return getContentFragment(index, children, typeObj, typeObj.type);
-            })}
+            <h1 className='mb-8 text-4xl font-semibold'>{post?.title}</h1>
+              {post.content?.raw.children.map(( typeObj, index) => {
+                  const children = typeObj.children.map((item, itemIndex) => getContentFragment(itemIndex, item.text, item));
+                  return getContentFragment(index, children, typeObj, typeObj.type);
+              })}
+            </div>
+            <div>
+              {post.photosByPost?.photo?.map((photo) => (
+                 <img
+                 alt={post?.title}
+                 src={photo?.url}
+                 className='object-center object-cover mb-8 h-[40vw] w-full rounded-t-lg'
+                 />
+              ))}
         </div>
     </div>
   )
