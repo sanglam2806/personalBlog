@@ -70,7 +70,7 @@ const Footer = () => {
                 </a>
             </div>
             <div className="pb-2 text-center" >
-                <span className="text-white"> © 2023 Copyright: Tim Mitsukeru</span>
+                <span className="text-white"> © 2023 Copyright: Tim Mitsuru</span>
             </div>
         </div>
     </div>

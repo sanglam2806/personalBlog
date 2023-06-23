@@ -54,7 +54,7 @@ const PostDetail = ( {post} ) => {
               />
         </div>
         <div className='px-4 lg:px-0'>
-            <div className='flex items-center mb-8 w-full'>
+            <div className='flex items-center w-full'>
                 <div className='flex items-center mb-4 lg:mb-0 w-full lg:w-auto mr-8'>
                     <img
                         alt={post.author?.name}
@@ -67,6 +67,9 @@ const PostDetail = ( {post} ) => {
                     <span> {moment(post.createAt).format('LL')}</span>
                 </div>
             </div>
+            <div className='font-medium text-xs pl-[3vw] mb-8 text-gray-700'>
+                    {/* <span> {post?.viewCount}</span> {' view'}  */}
+                </div>
             <h1 className='mb-8 text-4xl font-semibold'>{post?.title}</h1>
               {post.content?.raw.children.map(( typeObj, index) => {
                   const children = typeObj.children.map((item, itemIndex) => getContentFragment(itemIndex, item.text, item));
@@ -78,7 +81,7 @@ const PostDetail = ( {post} ) => {
                  <img
                  alt={post?.title}
                  src={photo?.url}
-                 className='object-center object-cover mb-8 h-[40vw] w-full rounded-t-lg'
+                 className='object-center mb-8 h-full w-full rounded-t-lg'
                  />
               ))}
         </div>

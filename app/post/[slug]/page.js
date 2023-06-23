@@ -2,7 +2,7 @@
 import React from 'react'
 import { useState, useEffect } from 'react';
 
-import { getPosts, getPostDetail } from '../../../services';
+import { getPostDetail } from '../../../services';
 import Categories from "@components/Categories";
 import Postwidget from "@components/Postwidget";
 import Author from "@components/Author";

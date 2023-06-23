@@ -16,8 +16,9 @@ const Author = ({author}) => {
           unoptimized
         />
         </div>
-        <h3 className='text-white my-4 text-xl font-bold'> {author?.name}</h3>
-        <p className='text-white text-lg'>{author?.bio}</p>
+        <h3 className='text-white my-4 text-4xl font-bold'> {author?.name}</h3>
+        <p className='text-white px-8 text-base'>{author?.bio}</p>
+        <p className='text-white px-8 pb-8 text-base'>Mình là Sang - một đứa trẻ chưa lớn đang đi tìm giá trị bản thân.</p>
     </div>
   )
 }

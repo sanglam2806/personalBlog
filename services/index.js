@@ -6,7 +6,7 @@ export const getPosts = async () => {
     const query = gql`
     query Assets {
       postsConnection(
-        orderBy: createdAt_DESC
+        orderBy: updatedAt_DESC
         first: 4
       ) {
         edges {
@@ -19,8 +19,9 @@ export const getPosts = async () => {
                 url
               }
             }
-            createdAt
+            updatedAt
             slug
+            viewCount
             title
             excerpt
             featureImage {
@@ -43,14 +44,14 @@ export const getRecentPosts = async() => {
   const query = gql`
   query GetPostDetails () {
     posts(
-      orderBy: createdAt_DESC
+      orderBy: updatedAt_DESC
       first: 3
     ) {
       title
       featureImage {
         url
       }
-      createdAt
+      updatedAt
       slug
     }
   }
@@ -65,14 +66,14 @@ export const getSimilarPosts = async(categories, slug) => {
     query GetPostDetails ($slug: String!, $categories: [String!]) {
       posts(
         where: { slug_not: $slug, AND: {categories_some: { slug_in: $categories}}}
-        orderBy: createdAt_DESC
+        orderBy: updatedAt_DESC
         first: 3
       ) {
         title
         featureImage {
           url
         }
-        createdAt
+        updatedAt
         slug
       }
     }
@@ -107,9 +108,10 @@ export const getPostDetail = async (slug) => {
           url
         }
       }
-      createdAt
+      updatedAt
       slug
       title
+      viewCount
       excerpt
       featureImage {
         url
@@ -152,7 +154,7 @@ export const getComments = async (slug) => {
     query GetCommentsPost($slug: String!) {
       comments (where: {post: {slug:$slug}}){
         name
-        createdAt
+        updatedAt
         comment
       }
     }
@@ -169,7 +171,7 @@ export const getFeaturedPosts = async () => {
   const query = gql`
     query GetFeaturedPost() {
       posts (where: {featuredPost: true}
-        orderBy: createdAt_DESC
+        orderBy: updatedAt_DESC
         ) {
         author {
           bio
@@ -179,7 +181,7 @@ export const getFeaturedPosts = async () => {
             url
           }
         }
-        createdAt
+        updatedAt
         slug
         title
         featureImage {
@@ -196,7 +198,7 @@ export const getAllPost = async () => {
   const query = gql`
   query Assets {
     postsConnection(
-      orderBy: createdAt_DESC
+      orderBy: updatedAt_DESC
     ) {
       edges {
         node {
@@ -208,7 +210,7 @@ export const getAllPost = async () => {
               url
             }
           }
-          createdAt
+          updatedAt
           slug
           title
           excerpt
@@ -235,7 +237,7 @@ export const getPostsByCategory = async (categorySlug) => {
   query Assets($categorySlug: String!) {
     postsConnection(
       where: {categories_some: {slug: $categorySlug}}
-      orderBy: createdAt_DESC
+      orderBy: updatedAt_DESC
     ) {
       edges {
         node {
@@ -247,7 +249,7 @@ export const getPostsByCategory = async (categorySlug) => {
               url
             }
           }
-          createdAt
+          updatedAt
           slug
           title
           excerpt
@@ -266,4 +268,25 @@ export const getPostsByCategory = async (categorySlug) => {
   const results = await request(graphqlAPI, query, { categorySlug });
   console.log(results);
   return results.postsConnection.edges;
+}
+
+export const getAuthor = async () => {
+  const query = gql`
+  query getAuthor {
+    authors {
+      photo {
+        url
+      }
+      bio
+      name
+    }
+  }
+  `
+  try {
+    const results = await request(graphqlAPI, query);
+    return results.authors[0];
+  }catch (err) {
+      console.log(err);
+      return;
+  }
 }

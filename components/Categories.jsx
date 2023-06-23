@@ -15,7 +15,7 @@ const Categories = () => {
   return (
     <div className='bg-white bg-opacity-60 shadow-lg rounded-lg p-8 mb-8'>
         <h3 className='text-xl mb-8 font-semibold border-b pb-4'>
-          Categories
+          カテゴリー
         </h3>
         {categories.map((category) => (
           <Link key={category.slug} href={`/category/${category.slug}`}>
