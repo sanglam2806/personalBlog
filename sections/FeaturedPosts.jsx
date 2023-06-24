@@ -1,8 +1,8 @@
 'use client'
 
 import React, { useState, useEffect } from 'react'
-import "react-responsive-carousel/lib/styles/carousel.min.css";
-import Carousel from 'react-grid-carousel';
+import Carousel from "react-multi-carousel";
+import "react-multi-carousel/lib/styles.css";
 import FeaturedPostCard from '@components/FeaturedPostCard';
 import { getFeaturedPosts } from '../services'
 
@@ -55,16 +55,17 @@ const FeaturedPosts = () => {
 
     return (
         <div className= 'mb-8'>
-            {/* <Carousel infinite responsive={responsive} itemClass='px-4'>
+            {/* <Carousel infinite responsive={responsive} i>
                 {dataLoad && featuredPosts.map((post) => (
                     <FeaturedPostCard post={post}/>
                 ))}
             </Carousel> */}
-            <Carousel cols={4} rows={1} gap={10}>
+            <Carousel infinite responsive={responsive} itemClass='px-8'>
                 {dataLoad && featuredPosts.map((post) => (
-                    <Carousel.Item>
+                      <div>
                         <FeaturedPostCard post={post}/>
-                    </Carousel.Item>
+                      </div>
+  
                 ))}
             </Carousel>
         </div>
