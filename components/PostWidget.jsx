@@ -4,6 +4,7 @@ import moment from 'moment'
 import 'moment/locale/ja'
 import Link from 'next/link'
 import { getRecentPosts, getSimilarPosts } from "../services"
+
 moment.locale('ja')
 const PostWidget = ({ categories, slug}) => {
   const [relatedPosts, setRelatedPosts] = useState([]);

@@ -1,7 +1,7 @@
 "use client"
 import React from 'react'
 import Categories from "@components/Categories";
-import Postwidget from "@components/Postwidget";
+import Postwidget from "@components/PostWidget";
 import ListPost from "@components/ListPost";
 
 const AllPosts = ({slug}) => {

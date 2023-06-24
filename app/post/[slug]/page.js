@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 
 import { getPostDetail } from '../../../services';
 import Categories from "@components/Categories";
-import Postwidget from "@components/Postwidget";
+import Postwidget from "@components/PostWidget";
 import Author from "@components/Author";
 import Comments from "@components/Comments";
 import CommentForm from "@components/CommentForm";
