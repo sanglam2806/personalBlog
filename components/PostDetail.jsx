@@ -55,7 +55,7 @@ const PostDetail = ( {post} ) => {
         </div>
         <div className='px-4 lg:px-0'>
             <div className='flex items-center w-full'>
-                <div className='flex items-center mb-4 lg:mb-0 w-full lg:w-auto mr-8'>
+                <div className='flex items-center mb-4 lg:mb-0 w-[58vw] lg:w-auto lg:mr-8'>
                     <img
                         alt={post.author?.name}
                         className='object-contain h-10 w-10 align-middle rounded-full'
@@ -63,7 +63,7 @@ const PostDetail = ( {post} ) => {
                     />
                     <p className='inline align-middle text-gray-700 ml-2 text-md'>{post.author?.name}</p>
                 </div>
-                <div className='font-medium text-gray-700'>
+                <div className='font-medium lg:text-sm text-xs text-gray-700'>
                     <span> {moment(post.createAt).format('LL')}</span>
                 </div>
             </div>

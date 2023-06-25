@@ -27,7 +27,7 @@ export default async function Home({ }) {
         <div>
           <Profile/>
         </div>
-        <div className="p-10 text-center text-3xl font-japanese font-light">
+        <div className="p-10 text-center lg:text-3xl text-lg font-japanese font-light">
           ブログへようこそ！旅をはじめまそう！
         </div>
         <div>

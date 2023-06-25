@@ -113,6 +113,7 @@ export const getPostDetail = async (slug) => {
       title
       viewCount
       excerpt
+      isJapanese
       featureImage {
         url
       }

@@ -6,14 +6,14 @@ moment.locale('ja')
 const PostCardRecent = ({ post }) => {
   return (
     <div className='shadow-lg rounded-lg p-0 lg:p-4 m-8'>
-        <div className='relative overflow-hidden shadow-md pb-[21vw] px-[1vw] rounded-lg mb-6' key={post?.title}>
+        <div className='relative overflow-hidden shadow-md lg:pb-[21vw] pb-[26vw] px-[1vw] rounded-lg mb-6' key={post?.title}>
           <img
             src={post?.featureImage?.url}
             alt={post?.title}
-            className='object-center absolute h-[20vw] w-full object-cover shadow-lg rounded-t-lg lg:rounded-lg'
+            className='object-center absolute lg:h-[20vw] h-[25vw] w-full object-cover shadow-lg rounded-t-lg lg:rounded-lg'
           />
         </div>
-        <h1 className='transition duration-100 text-center mb-8 cursor-pointer hover:text-pink-600 text-3xl font-semibold'>
+        <h1 className='transition duration-100 text-center mb-8 cursor-pointer hover:text-pink-600 text-base md:text-xl lg:text-3xl font-semibold'>
           <Link href={`/post/${post?.slug}`}>
             {post?.title}
           </Link>
@@ -34,9 +34,9 @@ const PostCardRecent = ({ post }) => {
           </div>
         </div>
         <p className='text-center text-sm text-gray-700 font-normal px-4 lg:px-20 mb-8'>{post?.excerpt}</p>
-        <div className='text-center'>
+        <div className='text-center pb-1'>
           <Link href={`/post/${post?.slug}`}>
-            <span className='transistion duration-500 transform hover:-translate-y-1 inline-block bg-blue-500 text-lg font-medium rounded-full text-white px-8 py-3 cursor-pointer'>
+            <span className='transistion duration-500 transform hover:-translate-y-1 inline-block bg-blue-500 md:text-sm lg:text-lg font-medium rounded-full text-white px-2 md:px-4 lg:px-8 py-3 cursor-pointer'>
               もっとみる
             </span>
           </Link>

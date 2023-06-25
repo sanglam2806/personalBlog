@@ -13,7 +13,7 @@ const Header = () => {
     }, [])
 
   return (
-    <div className="mx-auto px-8">
+    <div className="mx-auto lg:px-8">
         <div className='border-b w-full inline-block border-blue-400 py-8'>
             <div className='md:float-left block'>
                 <Link href="/">
@@ -25,7 +25,7 @@ const Header = () => {
             <div className='hidden md:float-left md:contents'>
                 {categories.map((category) => (
                     <Link href={`/category/${category.slug}`} key={category.slug}>
-                        <span className='md:float-right mt-2 align-middle text-blue-400 ml-4 font-semibold cursor-pointer'>
+                        <span className='md:float-right mt-2 align-middle lg:text-blue-400 text-blue-800 lg:ml-4 ml-2 font-semibold cursor-pointer'>
                             {category.name}
                         </span>
                     </Link>
