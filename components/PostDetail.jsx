@@ -1,49 +1,51 @@
 import React from 'react'
+import { useEffect, useState } from 'react';
 import moment from 'moment';
 import 'moment/locale/ja'
 moment.locale('ja')
 const PostDetail = ( {post} ) => {
 
-  console.log(post);
-    const getContentFragment = (index, text, obj, type) => {
-        let modifiedText = text;
-    
-        if (obj) {
-          if (obj.bold) {
-            modifiedText = (<b key={index}>{text}</b>);
-          }
-    
-          if (obj.italic) {
-            modifiedText = (<em key={index}>{text}</em>);
-          }
-    
-          if (obj.underline) {
-            modifiedText = (<u key={index}>{text}</u>);
-          }
+  const getContentFragment = (index, text, obj, type) => {
+      let modifiedText = text;
+  
+      if (obj) {
+        if (obj.bold) {
+          modifiedText = (<b key={index}>{text}</b>);
         }
-    
-        switch (type) {
-          case 'heading-three':
-            return <h3 key={index} className="text-xl font-semibold mb-4">{modifiedText.map((item, i) => <React.Fragment key={i}>{item}</React.Fragment>)}</h3>;
-          case 'paragraph':
-            return <p key={index} className="mb-8">{modifiedText.map((item, i) => <React.Fragment key={i}>{item}</React.Fragment>)}</p>;
-          case 'heading-four':
-            return <h4 key={index} className="text-md font-semibold mb-4">{modifiedText.map((item, i) => <React.Fragment key={i}>{item}</React.Fragment>)}</h4>;
-          case 'image':
-            return (
-              <img
-                key={index}
-                alt={obj.title}
-                height={obj.height}
-                width={obj.width}
-                src={obj.src}
-              />
-            );
-          default:
-            return modifiedText;
+  
+        if (obj.italic) {
+          modifiedText = (<em key={index}>{text}</em>);
         }
-      };
-      
+  
+        if (obj.underline) {
+          modifiedText = (<u key={index}>{text}</u>);
+        }
+      }
+  
+      switch (type) {
+        case 'heading-three':
+          return <h3 key={index} className="text-xl font-semibold mb-4">{modifiedText.map((item, i) => <React.Fragment key={i}>{item}</React.Fragment>)}</h3>;
+        case 'paragraph':
+          return <p key={index} className="mb-8">{modifiedText.map((item, i) => <React.Fragment key={i}>{item}</React.Fragment>)}</p>;
+        case 'heading-four':
+          return <h4 key={index} className="text-md font-semibold mb-4">{modifiedText.map((item, i) => <React.Fragment key={i}>{item}</React.Fragment>)}</h4>;
+        case 'image':
+          return (
+            <img
+              key={index}
+              alt={obj.title}
+              height={obj.height}
+              width={obj.width}
+              src={obj.src}
+            />
+          );
+        default:
+          return modifiedText;
+      }
+    };
+  
+  
+
   return (
     <div className='bg-white bg-opacity-60 shadow-lg rounded-lg lg:p-8 pb-12 mb-8'>
         <div className='relative overflow-hidden shadow-md mb-6'>
@@ -68,7 +70,7 @@ const PostDetail = ( {post} ) => {
                 </div>
             </div>
             <div className='font-medium text-xs pl-[3vw] mb-8 text-gray-700'>
-                    {/* <span> {post?.viewCount}</span> {' view'}  */}
+                    <span> {post?.viewCount}</span> {' views'} 
                 </div>
             <h1 className='mb-8 text-4xl font-semibold'>{post?.title}</h1>
               {post.content?.raw.children.map(( typeObj, index) => {
