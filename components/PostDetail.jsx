@@ -66,7 +66,7 @@ const PostDetail = ( {post} ) => {
                     <p className='inline align-middle text-gray-700 ml-2 text-md'>{post.author?.name}</p>
                 </div>
                 <div className='font-medium lg:text-sm text-xs text-gray-700'>
-                    <span> {moment(post.createAt).format('LL')}</span>
+                    <span> {moment(post.updatedAt).format('LL')}</span>
                 </div>
             </div>
             <div className='font-medium text-xs pl-[3vw] mb-8 text-gray-700'>

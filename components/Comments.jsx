@@ -26,13 +26,13 @@ const Comments = ({slug}) => {
             {'）'}
           </h3>
           {comments.map((comment) => (
-            <div key={comment.createAt} className='border-b border-gray-100 mb-4 pb-4'>
+            <div key={comment.updatedAt} className='border-b border-gray-100 mb-4 pb-4'>
               <p className='mb-4'>
                 <span className='text-lg font-semibold'>{comment.name}</span>
                 {' '}
                 <span className='text-xs'> 
                   {' '}
-                  {moment(comment.createAt).format('LL')}
+                  {moment(comment.updatedAt).format('LL')}
                 </span>
               </p>
               <p className='whitespace-pre-line text-gray-600 w-full'>{parse(comment.comment)}</p>

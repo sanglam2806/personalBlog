@@ -32,7 +32,7 @@ const PostCard = ({ post }) => {
             <p className='inline align-middle text-gray-700 ml-2 text-md'>{post.author.name}</p>
           </div>
           <div className='font-medium text-xs text-gray-700'>
-            <span> {moment(post.createAt).format('LL')}</span>
+            <span> {moment(post.updatedAt).format('LL')}</span>
           </div>
         </div>
         <p className='text-center text-sm lg:text-lg text-gray-700 font-normal px-4 lg:px-20 mb-8'>{post.excerpt}</p>
