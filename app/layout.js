@@ -3,7 +3,7 @@ import Header from '@components/Header'
 import Footer from '@components/Footer'
 
 export const metadata = {
-  title: 'Tim Mitsukeru Blog',
+  title: 'Tim Mitsuru Blog',
   description: '日本で自分の体験を提供する所です。',
 }
 
