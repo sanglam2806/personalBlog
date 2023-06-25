@@ -9,7 +9,7 @@ const japaneseFont = localFont({ src: '../../../public/fonts/A-OTF-Kyoukasho-ICA
 
 const PostByCategory = ({params}) => {
   return (
-    <div className="lg:px-32 px-16 mb-8">
+    <div className="lg:px-32 md:px-16 px-4 mb-8">
       <div className={japaneseFont.className}><span className='lg:text-3xl md:text-xl font-semibold'> {params.slug} </span></div>
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
         <ListPost slug={params.slug}/>

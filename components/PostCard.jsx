@@ -9,14 +9,14 @@ const PostCard = ({ post }) => {
   return (
     <div className='bg-white bg-opacity-60 shadow-lg rounded-lg p-0 md:p-0 lg:p-8 pb-12 mb-8'>
       <Link href={`/post/${post.slug}`}>
-        <div className='relative overflow-hidden shadow-md pb-[40vw] mb-6' key={post.title}>
+        <div className='relative overflow-hidden shadow-md lg:pb-[40vw] pb-[50vw] mb-6' key={post.title}>
           <img
             src={post.featureImage.url}
             alt={post.title}
-            className='object-center absolute h-[40vw] w-full object-cover shadow-lg rounded-t-lg lg:rounded-lg'
+            className='object-center absolute lg:h-[40vw] h-[50vw] w-full object-cover shadow-lg rounded-t-lg lg:rounded-lg'
           />
         </div>
-        <h1 className='transition duration-100 text-center mb-8 cursor-pointer hover:text-pink-600 text-xl lg:text-3xl font-semibold'>
+        <h1 className='transition duration-100 text-center lg:mb-8 mb-2 cursor-pointer hover:text-pink-600 text-xl lg:text-3xl font-semibold'>
             {post.title}
         </h1>
       </Link>

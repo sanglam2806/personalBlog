@@ -6,14 +6,14 @@ moment.locale('ja')
 const PostCardRecent = ({ post }) => {
   return (
     <div className='shadow-lg rounded-lg p-0 lg:p-4 m-8'>
-        <div className='relative overflow-hidden shadow-md lg:pb-[21vw] pb-[26vw] px-[1vw] rounded-lg mb-6' key={post?.title}>
+        <div className='relative overflow-hidden shadow-md lg:pb-[21vw] md:pb-[26vw] pb-[45vw] px-[1vw] rounded-lg mb-6' key={post?.title}>
           <img
             src={post?.featureImage?.url}
             alt={post?.title}
-            className='object-center absolute lg:h-[20vw] h-[25vw] w-full object-cover shadow-lg rounded-t-lg lg:rounded-lg'
+            className='object-center absolute lg:h-[20vw] md:h-[25vw] h-[44vw] w-full object-cover shadow-lg rounded-t-lg lg:rounded-lg'
           />
         </div>
-        <h1 className='transition duration-100 text-center mb-8 cursor-pointer hover:text-pink-600 text-base md:text-xl lg:text-3xl font-semibold'>
+        <h1 className='transition duration-100 text-center lg:mb-8 mb-2 cursor-pointer hover:text-pink-600 text-base md:text-xl lg:text-3xl font-semibold'>
           <Link href={`/post/${post?.slug}`}>
             {post?.title}
           </Link>

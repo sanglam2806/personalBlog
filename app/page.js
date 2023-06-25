@@ -27,12 +27,12 @@ export default async function Home({ }) {
         <div>
           <Profile/>
         </div>
-        <div className="p-10 text-center lg:text-3xl text-lg font-japanese font-light">
+        <div className="p-10 text-center lg:text-3xl md:text-lg sm:text-base font-semibold">
           ブログへようこそ！旅をはじめまそう！
         </div>
         <div>
           <FeaturedPosts/>
-          <div className="py-8 lg:mx-64 mx-16 flex-auto items-center">
+          <div className="py-8 lg:mx-64 md:mx-16 flex-auto items-center">
             <ListRecentPost/>
           </div>
         </div>
