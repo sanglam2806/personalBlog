@@ -23,11 +23,11 @@ const Profile = () => {
         <div className='flex items-center ml-2 col-span-6 sm:mr-1'>
             <div>
                 <p className='block pb-4 text-shadow text-2xl md:text-4xl lg:text-7xl font-medium'>{author?.name}</p>
-                <p className='block ml-1 text-xs md:text-base lg:text-2xl'>僕の世界へよろこそ！ミツルと言います</p>
-                <p className='block ml-1 text-xs md:text-base lg:text-2xl'>日本にいる撮影が好きのベトナム人です</p>
-                <p className='block ml-1 text-xs md:text-base lg:text-2xl'>ここに来た所、出会った人などについて</p>
-                <p className='block ml-1 text-xs md:text-base lg:text-2xl'>写真で自分の日本の生活を語ります</p>
-                <p className='block ml-1 text-xs md:text-base lg:text-2xl'>観てくださる方の心が、少しでも温かくなるような嬉しいです</p>
+                <p className='block ml-1 text-xs md:text-base lg:text-2xl'>僕の世界へよろこそ！ミツルと言います.</p>
+                <p className='block ml-1 text-xs md:text-base lg:text-2xl'>日本に住んでる撮影が好きのベトナム人です.</p>
+                <p className='block ml-1 text-xs md:text-base lg:text-2xl'>ここで着いた所、出会った人、日本の生活などについて、</p>
+                <p className='block ml-1 text-xs md:text-base lg:text-2xl'>写真で語ります.</p>
+                <p className='block ml-1 text-xs md:text-base lg:text-2xl'>観てくださる方の心が、少しでも温かくなるような嬉しいです.</p>
             </div>
         </div>
     </div>
