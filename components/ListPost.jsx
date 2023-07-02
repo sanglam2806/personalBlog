@@ -6,7 +6,6 @@ import { useEffect, useState } from 'react';
 import PostCard from "@components/PostCard";
 
 const ListPost = (category) => {
-  console.log(category.slug)
     const [posts, setPosts] = useState([]);
   
     useEffect(() => {

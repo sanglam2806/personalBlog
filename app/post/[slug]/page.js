@@ -9,7 +9,8 @@ import Author from "@components/Author";
 import Comments from "@components/Comments";
 import CommentForm from "@components/CommentForm";
 import PostDetail from "@components/PostDetail";
-import localFont from 'next/font/local'
+import localFont from 'next/font/local';
+
 
 const japaneseFont = localFont({ src: '../../../public/fonts/A-OTF-Kyoukasho-ICA-Pro-M.otf' })
 const vietnameseFont = localFont({ src: '../../../public/fonts/Roboto-Light.ttf' })

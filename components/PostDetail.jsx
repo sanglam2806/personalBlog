@@ -1,5 +1,6 @@
 import React from 'react'
 import { useEffect, useState } from 'react';
+import { increaseView } from '../services';
 import moment from 'moment';
 import 'moment/locale/ja'
 moment.locale('ja')
@@ -44,7 +45,10 @@ const PostDetail = ( {post} ) => {
       }
     };
   
-  
+    useEffect(() => {
+      const postObject = {'viewCount': (post?.viewCount + 1), 'slug': post.slug};
+      // increaseView(postObject);
+    },[post?.slug])
 
   return (
     <div className='bg-white bg-opacity-60 shadow-lg rounded-lg lg:p-8 pb-12 mb-8'>
@@ -52,7 +56,7 @@ const PostDetail = ( {post} ) => {
           <img
               alt={post?.title}
               src={post?.featureImage?.url}
-              className='object-center object-cover h-[40vw] w-full rounded-t-lg'
+              className='object-center object-cover md:h-[40vw] h-[50vw] w-full rounded-t-lg'
               />
         </div>
         <div className='px-4 lg:px-0'>
@@ -66,7 +70,7 @@ const PostDetail = ( {post} ) => {
                     <p className='inline align-middle text-gray-700 ml-2 text-md'>{post.author?.name}</p>
                 </div>
                 <div className='font-medium lg:text-sm text-xs text-gray-700'>
-                    <span> {moment(post.updatedAt).format('LL')}</span>
+                    <span> {moment(post.createdAt).format('LL')}</span>
                 </div>
             </div>
             <div className='font-medium text-xs pl-[3vw] mb-8 text-gray-700'>

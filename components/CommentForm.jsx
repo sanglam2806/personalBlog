@@ -47,7 +47,6 @@ const CommentForm = ({slug}) => {
           setShowSuccessMessage(false);
         }, 3000);
       })
-
   }
 
   return (

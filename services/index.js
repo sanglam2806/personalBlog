@@ -6,7 +6,7 @@ export const getPosts = async () => {
     const query = gql`
     query Assets {
       postsConnection(
-        orderBy: updatedAt_DESC
+        orderBy: createdAt_DESC
         first: 4
       ) {
         edges {
@@ -19,7 +19,7 @@ export const getPosts = async () => {
                 url
               }
             }
-            updatedAt
+            createdAt
             slug
             viewCount
             title
@@ -44,14 +44,14 @@ export const getRecentPosts = async() => {
   const query = gql`
   query GetPostDetails () {
     posts(
-      orderBy: updatedAt_DESC
+      orderBy: createdAt_DESC
       first: 3
     ) {
       title
       featureImage {
         url
       }
-      updatedAt
+      createdAt
       slug
     }
   }
@@ -66,14 +66,14 @@ export const getSimilarPosts = async(categories, slug) => {
     query GetPostDetails ($slug: String!, $categories: [String!]) {
       posts(
         where: { slug_not: $slug, AND: {categories_some: { slug_in: $categories}}}
-        orderBy: updatedAt_DESC
+        orderBy: createdAt_DESC
         first: 3
       ) {
         title
         featureImage {
           url
         }
-        updatedAt
+        createdAt
         slug
       }
     }
@@ -108,7 +108,7 @@ export const getPostDetail = async (slug) => {
           url
         }
       }
-      updatedAt
+      createdAt
       slug
       title
       viewCount
@@ -134,7 +134,6 @@ export const getPostDetail = async (slug) => {
   `;
 
   const result = await request(graphqlAPI, query, { slug });
-  console.log(result);
   return result.post;
 }
 
@@ -149,13 +148,24 @@ export const submitComment = async (obj) => {
   return result.json();
 };
 
+export const increaseView = async (obj) => {
+  const result = await fetch('/api/viewcount', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(obj),
+  });
+  return result.json();
+}
+
 export const getComments = async (slug) => {
   try {
   const query = gql`
     query GetCommentsPost($slug: String!) {
       comments (where: {post: {slug:$slug}}){
         name
-        updatedAt
+        createdAt
         comment
       }
     }
@@ -172,7 +182,7 @@ export const getFeaturedPosts = async () => {
   const query = gql`
     query GetFeaturedPost() {
       posts (where: {featuredPost: true}
-        orderBy: updatedAt_DESC
+        orderBy: createdAt_DESC
         ) {
         author {
           bio
@@ -182,7 +192,7 @@ export const getFeaturedPosts = async () => {
             url
           }
         }
-        updatedAt
+        createdAt
         slug
         title
         featureImage {
@@ -199,7 +209,7 @@ export const getAllPost = async () => {
   const query = gql`
   query Assets {
     postsConnection(
-      orderBy: updatedAt_DESC
+      orderBy: createdAt_DESC
     ) {
       edges {
         node {
@@ -211,7 +221,7 @@ export const getAllPost = async () => {
               url
             }
           }
-          updatedAt
+          createdAt
           slug
           title
           excerpt
@@ -238,7 +248,7 @@ export const getPostsByCategory = async (categorySlug) => {
   query Assets($categorySlug: String!) {
     postsConnection(
       where: {categories_some: {slug: $categorySlug}}
-      orderBy: updatedAt_DESC
+      orderBy: createdAt_DESC
     ) {
       edges {
         node {
@@ -250,7 +260,7 @@ export const getPostsByCategory = async (categorySlug) => {
               url
             }
           }
-          updatedAt
+          createdAt
           slug
           title
           excerpt
@@ -267,7 +277,6 @@ export const getPostsByCategory = async (categorySlug) => {
   }
   `
   const results = await request(graphqlAPI, query, { categorySlug });
-  console.log(results);
   return results.postsConnection.edges;
 }
 
