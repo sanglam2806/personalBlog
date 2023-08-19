@@ -2,13 +2,13 @@
 import React from 'react'
 import {useState, useEffect} from 'react'
 import Link from 'next/link'
-import { getCategories } from '../services'
+import { graphqlCMS, QUERY_SLUG_CATEGORIES } from '@services/graphql/Queries'
 
 const Categories = () => {
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
-    getCategories().then((result) => setCategories(result));
+    graphqlCMS.request(QUERY_SLUG_CATEGORIES).then(res => setCategories(res.categories));
   }, [])
 
 

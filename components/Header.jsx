@@ -1,15 +1,15 @@
 "use client"
 import {useState, useEffect} from 'react'
 import Link from 'next/link'
-import { getCategories } from '../services'
+import { graphqlCMS, QUERY_SLUG_CATEGORIES } from '@services/graphql/Queries'
 
-import React, { useContext } from 'react'
+import React from 'react'
 
 const Header = () => {
     const [categories, setCategories] = useState([]);
 
     useEffect(() => {
-        getCategories().then((result) => setCategories(result));
+        graphqlCMS.request(QUERY_SLUG_CATEGORIES).then(res => setCategories(res.categories));
     }, [])
 
   return (
@@ -23,10 +23,10 @@ const Header = () => {
                 </Link>
             </div>
             <div className='md:float-left md:contents'>
-                {categories.map((category) => (
-                    <Link href={`/category/${category.slug}`} key={category.slug}>
+                {categories?.map((category) => (
+                    <Link href={`/category/${category?.slug}`} key={category?.slug}>
                         <span className='md:float-right mt-2 align-middle lg:text-blue-400 text-blue-800 lg:ml-4 ml-2 font-semibold cursor-pointer'>
-                            {category.name}
+                            {category?.name}
                         </span>
                     </Link>
                 ))}

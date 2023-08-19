@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import moment from 'moment'
 import 'moment/locale/ja'
 import Link from 'next/link'
-import { getRecentPosts, getSimilarPosts } from "../services"
+import { graphqlCMS, QUERY_TOP4_POST, QUERY_SIMILAR_POSTS } from '@services/graphql/Queries'
 
 moment.locale('ja')
 const PostWidget = ({ categories, slug}) => {
@@ -11,9 +11,9 @@ const PostWidget = ({ categories, slug}) => {
 
   useEffect(() => {
     if(slug) {
-      getSimilarPosts(categories, slug).then((result) => setRelatedPosts(result));
+      graphqlCMS.request(QUERY_SIMILAR_POSTS, { slug, categories }).then(res => setRelatedPosts(res.posts));
     } else {
-      getRecentPosts().then((result) => setRelatedPosts(result));
+      graphqlCMS.request(QUERY_TOP4_POST).then(res => setRelatedPosts(res.posts));
     }
   }, [slug])
 

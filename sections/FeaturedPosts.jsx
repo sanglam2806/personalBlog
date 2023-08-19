@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react'
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import FeaturedPostCard from '@components/FeaturedPostCard';
-import { getFeaturedPosts } from '../services'
+import { graphqlCMS, QUERY_FEATURE_POSTS } from '@services/graphql/Queries';
 
 const responsive = {
     superLargeDesktop: {
@@ -31,8 +31,8 @@ const FeaturedPosts = () => {
     const [dataLoad, setDataLoad] = useState(true);
 
     useEffect(() => {
-        getFeaturedPosts().then((results) => {
-            setFeaturedPosts(results);
+        graphqlCMS.request(QUERY_FEATURE_POSTS).then((results) => {
+            setFeaturedPosts(results.posts);
             setDataLoad(true);
         });
     }, []);

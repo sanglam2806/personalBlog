@@ -1,13 +1,13 @@
 "use client"
 import React from 'react'
-import { getAuthor } from '@services';
 import { useState, useEffect } from 'react';
+import { graphqlCMS, QUERY_AUTHOR } from '@services/graphql/Queries';
 
 const Profile = () => {
     const [author, setAuthor] = useState([]);
 
     useEffect(() => {
-        getAuthor().then((result) => setAuthor(result));
+        graphqlCMS.request(QUERY_AUTHOR).then(res => setAuthor(res.authors[0]));
     }, [])
 
   return (

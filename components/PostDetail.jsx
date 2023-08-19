@@ -1,6 +1,7 @@
 import React from 'react'
-import { useEffect, useState } from 'react';
-import { increaseView } from '../services';
+import { useEffect } from 'react';
+import { increaseViewCount, pusblishPost } from '@services/PostService';
+
 import moment from 'moment';
 import 'moment/locale/ja'
 moment.locale('ja')
@@ -44,11 +45,18 @@ const PostDetail = ( {post} ) => {
           return modifiedText;
       }
     };
-  
+
+    const postObject = {'viewCount': (post?.viewCount + 1), 'slug': post?.slug};
+    const updateAndPusblishView = async() => {
+      if (post.slug != null) {
+        var result = await increaseViewCount(postObject);
+        await pusblishPost(result.id);
+      }
+    }
+    
     useEffect(() => {
-      const postObject = {'viewCount': (post?.viewCount + 1), 'slug': post.slug};
-      // increaseView(postObject);
-    },[post?.slug])
+      updateAndPusblishView();
+    },[post.slug])
 
   return (
     <div className='bg-white bg-opacity-60 shadow-lg rounded-lg lg:p-8 pb-12 mb-8'>
@@ -63,27 +71,27 @@ const PostDetail = ( {post} ) => {
             <div className='flex items-center w-full'>
                 <div className='flex items-center mb-4 lg:mb-0 w-[58vw] lg:w-auto lg:mr-8'>
                     <img
-                        alt={post.author?.name}
+                        alt={post?.author?.name}
                         className='object-contain h-10 w-10 align-middle rounded-full'
-                        src={post.author?.photo.url}
+                        src={post?.author?.photo.url}
                     />
-                    <p className='inline align-middle text-gray-700 ml-2 text-md'>{post.author?.name}</p>
+                    <p className='inline align-middle text-gray-700 ml-2 text-md'>{post?.author?.name}</p>
                 </div>
                 <div className='font-medium lg:text-sm text-xs text-gray-700'>
-                    <span> {moment(post.createdAt).format('LL')}</span>
+                    <span> {moment(post?.createdAt).format('LL')}</span>
                 </div>
             </div>
             <div className='font-medium text-xs pl-[3vw] mb-8 text-gray-700'>
                     <span> {post?.viewCount}</span> {' views'} 
                 </div>
             <h1 className='mb-8 text-4xl font-semibold'>{post?.title}</h1>
-              {post.content?.raw.children.map(( typeObj, index) => {
+              {post?.content?.raw.children.map(( typeObj, index) => {
                   const children = typeObj.children.map((item, itemIndex) => getContentFragment(itemIndex, item.text, item));
                   return getContentFragment(index, children, typeObj, typeObj.type);
               })}
             </div>
             <div>
-              {post.photosByPost?.photo?.map((photo) => (
+              {post?.photosByPost?.photo?.map((photo) => (
                  <img
                  alt={post?.title}
                  src={photo?.url}

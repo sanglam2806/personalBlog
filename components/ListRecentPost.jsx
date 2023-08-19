@@ -1,8 +1,8 @@
 "use client"
 import React from 'react'
-import { getPosts } from "../services"
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
+import { graphqlCMS, QUERY_TOP4_POST } from '@services/graphql/Queries';
 
 import PostCardRecent from "@components/PostCardRecent";
 
@@ -10,10 +10,7 @@ const ListRecentPost = () => {
     const [posts, setPosts] = useState([]);
   
     useEffect(() => {
-      (async () => {
-        const res = await getPosts();
-        setPosts(res);
-      })();
+      graphqlCMS.request(QUERY_TOP4_POST).then(res => setPosts(res.posts))
     }, []);
   return (
     <div className="bg-white bg-opacity-60 shadow-lg rounded-lg">
@@ -21,7 +18,7 @@ const ListRecentPost = () => {
       <div className="lg:col-span-9 col-span-1 grid lg:grid-cols-2 lg:gap-4 lg:px-8">
             {posts?.map( (post) => (
               <div key={post?.slug}>
-                <PostCardRecent post={post?.node} key={post?.slug}/> 
+                <PostCardRecent post={post} key={post?.slug}/> 
               </div>
             ))}
       </div>

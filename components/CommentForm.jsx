@@ -1,11 +1,9 @@
 "use client"
 import React, {useRef, useState, useEffect} from 'react'
+import { submitComment, publishComment } from '../services/CommentService';
 
-import { submitComment } from '../services';
-
-const CommentForm = ({slug}) => {
+const CommentForm = ({slug, sharedState, onChange }) => {
   const [error, setError] = useState(false);
-  const [localStorage, setLocalStorage] = useState(null);
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
   const commentEl = useRef();
   const nameEl = useRef();
@@ -17,7 +15,7 @@ const CommentForm = ({slug}) => {
     emailEf.current.value = window.localStorage.getItem('email');
   }, [])
 
-  const handelCommentSubmission = () => {
+  async function handelCommentSubmission() {
     setError(false);
 
     const {value: comment} = commentEl.current;
@@ -27,7 +25,6 @@ const CommentForm = ({slug}) => {
 
     if(!comment || !name|| !email) {
       setError(true);
-      return;
     }
 
     const commentObj = { name, email, comment, slug };
@@ -40,13 +37,17 @@ const CommentForm = ({slug}) => {
       window.localStorage.removeItem('email');
     }
 
-    submitComment(commentObj)
-      .then((res) => {
-        setShowSuccessMessage(true);
-        setTimeout(() => {
-          setShowSuccessMessage(false);
-        }, 3000);
-      })
+    const r = await submitComment(commentObj);
+    await publishComment(r.id).then(() => {
+      setShowSuccessMessage(true);
+    });
+
+    //update comments list when submit
+    onChange(!sharedState);
+
+    // reset Comment to wait new comment
+    commentEl.current.value = '';
+
   }
 
   return (

@@ -1,21 +1,22 @@
 "use client"
 import React from 'react'
-import { getAllPost, getPostsByCategory } from "../services"
 import { useEffect, useState } from 'react';
+import { graphqlCMS, QUERY_POSTS_BY_CATEGORY, QUERY_POSTS_BY_PAGE } from '@services/graphql/Queries';
 
 import PostCard from "@components/PostCard";
 
 const ListPost = (category) => {
     const [posts, setPosts] = useState([]);
-  
+    const categorySlug  = category.slug;
+
     useEffect(() => {
-      (async () => {
-        category.slug? getPostsByCategory(category.slug).then((result) => setPosts(result)) : getAllPost().then((result) => setPosts(result));
-      })();
+        category.slug? graphqlCMS.request(QUERY_POSTS_BY_CATEGORY,{ categorySlug }).then((result) => setPosts(result.posts)) 
+                      : graphqlCMS.request(QUERY_POSTS_BY_PAGE).then((result) => setPosts(result.posts));
+
     }, []);
   return (
     <div className="lg:col-span-9 col-span-1">
-          {posts?.map( (post) => <PostCard post={post?.node} key={post?.title} />)}
+          {posts?.map( (post) => <PostCard post={post} key={post?.title} />)}
     </div>
   )
 }
