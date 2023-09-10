@@ -7,7 +7,7 @@ export const metadata = {
   description: '日本で自分の体験を提供する所です。',
 }
 
-const RootLayout = ({ children }) => {
+const RootLayout = (props) => {
   return (
     <html lang='en'>
         <body>
@@ -17,7 +17,8 @@ const RootLayout = ({ children }) => {
           </div>
 
           <main className='app'>
-              {children}
+              {props.children}
+              {props.parallel}
           </main>
 
           <Footer/>

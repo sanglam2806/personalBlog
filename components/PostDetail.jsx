@@ -1,11 +1,13 @@
 import React from 'react'
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { increaseViewCount, pusblishPost } from '@services/PostService';
 
 import moment from 'moment';
 import 'moment/locale/ja'
+import Link from 'next/link';
 moment.locale('ja')
 const PostDetail = ( {post} ) => {
+  const modalRef = useRef();
 
   const getContentFragment = (index, text, obj, type) => {
       let modifiedText = text;
@@ -58,6 +60,16 @@ const PostDetail = ( {post} ) => {
       updateAndPusblishView();
     },[post.slug])
 
+  async function openModal(src) {
+    const modalImage = modalRef.current.querySelector("#modalImage");
+    modalImage.src = src;
+    modalRef.current.style.display = "block";
+  }
+  
+  async function closeModal() {
+    modalRef.current.style.display="none"
+  }
+
   return (
     <div className='bg-white bg-opacity-60 shadow-lg rounded-lg lg:p-8 pb-12 mb-8'>
         <div className='relative overflow-hidden shadow-md mb-6'>
@@ -91,12 +103,28 @@ const PostDetail = ( {post} ) => {
               })}
             </div>
             <div>
-              {post?.photosByPost?.photo?.map((photo) => (
-                 <img
-                 alt={post?.title}
-                 src={photo?.url}
-                 className='object-center mb-8 h-full w-full rounded-t-lg'
-                 />
+              {post?.photosByPost?.photo?.map((photo, index) => (
+                // ---------- Parralel Routes ---------------
+                // <Link key={index} href={`/post/${post.slug}/${photo?.id}`} scroll={false}>
+                  // <a  onClick={image}>
+                // ------------------------------------------
+                  <div id={index}>
+                    <img
+                      alt={post?.title}
+                      src={photo?.url}
+                      className="object-center mb-8 h-full w-full rounded-t-lg post_image"
+                      onClick={() => openModal(photo?.url)} // Pass the URL directly
+                      role="button"
+                      tabIndex="0"
+                    />
+
+                  <div className='imgModal' ref={modalRef}>
+                    <span className="close" onClick={closeModal}>&times;</span>
+                    <img className="modal-content" id="modalImage" />
+                  </div>
+                  </div>
+                  // </a>
+                //  </Link>
               ))}
         </div>
     </div>

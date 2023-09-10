@@ -44,6 +44,7 @@ const post = `
     },
     photosByPost {
         photo {
+            id,
             url
         }
     }
@@ -54,6 +55,9 @@ const author = `
     },
     bio,
     name
+`
+const asset = `
+    url
 `
 
 export const QUERY_SLUG_CATEGORIES =  gql `
@@ -141,6 +145,13 @@ export const QUERY_AUTHOR = gql `
     {
         authors {
             ${author}
+        }
+    }
+`
+export const QUERY_PHOTO_ASSET_BY_ID = gql`
+    query GetPhotoAssetByID ($photoId : ID!){
+        asset(where: {id: $photoId}) {
+            ${asset}
         }
     }
 `
