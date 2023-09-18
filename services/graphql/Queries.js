@@ -81,11 +81,23 @@ export const QUERY_POSTS_BY_CATEGORY = gql`
 `
 
 export const QUERY_POSTS_BY_PAGE = gql `
-    {
+    query GetPostByPage ($firstCurrentPage: Int!, $postOnePage: Int!){
         posts(
-            orderBy: createdAt_DESC
+            orderBy: createdAt_DESC,
+            skip: $firstCurrentPage,
+            first: $postOnePage
         ) {
             ${post}
+        }
+    }
+`
+
+export const QUERY_COUNT_POST = gql`
+    {
+        postsConnection {
+            aggregate {
+                count
+            }
         }
     }
 `

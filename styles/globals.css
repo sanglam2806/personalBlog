@@ -151,3 +151,44 @@ html {
     width: 100%;
   }
 }
+
+/*Pagination*/
+.pagination {
+  width: 95%;
+  margin: 25px auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  user-select: none;
+}
+
+.pagination .prev-next{
+  text-transform: capitalize;
+  cursor: pointer;
+  color: #182848;
+  font-weight: 600;
+  transition: all 0.3s linear;
+}
+
+.pagination .numbers {
+  display: flex;
+  gap: 5px;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.pagination .numbers li {
+  color: #182848;
+  width: 25px;
+  height: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.2s linear;
+}
+
+.pagination .numbers li:is(:hover, .active) {
+  background: #182848;
+  color: #fff;
+}
