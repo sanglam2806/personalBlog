@@ -23,18 +23,20 @@ const ListPost = (category) => {
                       : graphqlCMS.request(QUERY_POSTS_BY_PAGE, {firstCurrentPage , postOnePage}).then((result) => setPosts(result.posts));
         
         graphqlCMS.request(QUERY_COUNT_POST).then((result) => 
-            setCount(Number(result.postsConnection.aggregate.count) % postOnePage === 0 ?
-                Number(result.postsConnection.aggregate.count) % postOnePage :
+            setCount(Number(result.postsConnection.aggregate.count) % postOnePage == 0 ?
+                Number(result.postsConnection.aggregate.count)/ postOnePage :
                 (Number(result.postsConnection.aggregate.count) - Number(result.postsConnection.aggregate.count) % postOnePage) / postOnePage + 1
             ));
 
     }, [page]);
 
+    console.log(count);
+
   return (
     <div className="lg:col-span-9 col-span-1">
           {posts?.map( (post) => <PostCard post={post} key={post?.title} />)}
 
-          {category.slug? '' : <Pagination totalPage={count}/>}
+          {<Pagination totalPage={count}/>}
     </div>
   )
 }

@@ -8,8 +8,6 @@ const Pagination = ({totalPage}) => {
     const [pageNumbers, setPageNumber] = useState([]);
     const page = searchParams?.get('page') ? searchParams?.get('page') : 1;
 
-    console.log(totalPage);
-
     useEffect(() => {
         if (totalPage <= 1) return;
 
