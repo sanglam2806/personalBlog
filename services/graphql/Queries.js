@@ -40,7 +40,7 @@ const post = `
         slug,
     },
     content {
-        html
+        raw
     },
     photosByPost {
         photo {
