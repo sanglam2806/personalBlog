@@ -23,7 +23,7 @@ const CommentForm = ({slug, sharedState, onChange }) => {
     const {value: email} = emailEf.current;
     const {checked: storeData} = storeDataEl.current;
 
-    if(!comment || !name|| !email) {
+    if(!comment || !name) {
       setError(true);
     }
 
@@ -72,7 +72,7 @@ const CommentForm = ({slug, sharedState, onChange }) => {
         <input
             type='text'
             ref={emailEf}
-            className='p-2 outline-none w-full rounded-lg focus:ring-2 focus:ring-gray-200 bg-gray-100 text-gray-700'
+            className='p-2 outline-none w-full rounded-lg focus:ring-2 hidden focus:ring-gray-200 bg-gray-100 text-gray-700'
             placeholder='メール'
             name='email'
           />
